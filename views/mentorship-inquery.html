@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Matt Farley | Mentorship Inquiry
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/main.css">
+    <script defer="" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script> -->
+  </head>
+  <body>
+    <nav class="navbar is-transparent is-planner animate-fadeDown">
+      <div class="container">
+        <div class="navbar-brand"><a class="navbar-item" href="/"><img src="img/mf-logo.svg" alt="MEr" height="48"></a></div>
+        <div class="navbar-menu" id="navMenu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <p class="buttons"><a class="button is-medium tooltip is-tooltip-bottom" data-tooltip="Reset" onclick="document.getElementById('form').reset();"><span class="icon is-small"><i class="fas fa-undo-alt"></i></span></a><a class="button is-medium tooltip is-tooltip-bottom" data-tooltip="Close" href="/"><span class="icon is-small"><i class="fas fa-times"></i></span></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="is-form-page animate-fadeUp">
+      <section class="is-white has-text-centered">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-three-quarters"><img class="avatar" src="img/mf-avatar.svg">
+              <h1 class="title is-spaced is-size-1-desktop is-size-2-tablet is-size-3-mobile">I'm eager to explore mentorship with you! Tell me a bit about yourself.</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="is-white">
+        <div class="container">     
+          <form id="form" accept-charset="UTF-8">
+            <div class="columns is-centered">
+              <div class="column is-half">
+                <div class="field">
+                  <label class="label">Name</label>
+                  <div class="control is-expanded">
+                    <input class="input is-large" id="name" name="name" type="text" required>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-half">
+                <div class="field">
+                  <label class="label">Email</label>
+                  <div class="control is-expanded">
+                    <input class="input is-large" id="email" name="email" type="email" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns is-centered">
+              <div class="column is-half">
+                <div class="field">
+                  <label class="label">Type of Mentorship</label>
+                  <div class="control is-expanded">
+                    <div class="select is-fullwidth">
+                      <select class="is-large" id="type" name="mentorship type" required>
+                        <option value="0" disabled selected hidden> </option>
+                        <option>Spot Mentoring</option>
+                        <option>Production Support</option>
+                        <option>Tailored Learning</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-half">
+                <div class="field">
+                  <label class="label">Desired Outcome</label>
+                  <div class="control is-expanded">
+                    <div class="select is-fullwidth">
+                      <select class="is-large" id="outcome" name="outcome" required>
+                        <option value="0" disabled selected hidden> </option>
+                        <option>Fill knowledge gaps</option>
+                        <option>Improve design chops</option>
+                        <option>Make a career pivot</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns is-centered">
+              <div class="column">
+                <div class="field">
+                  <label class="label">Your Story</label>
+                  <div class="control is-expanded">
+                    <textarea class="textarea is-large" id="story" name="story" rows="5" required></textarea>
+                  </div>
+                </div>
+                <div class="field is-hidden">
+                  <label class="is-hidden"></label>
+                  <div class="control is-expanded is-hidden">
+                    <input class="is-hidden" name="_gotcha" type="hidden">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns is-centered">
+              <div class="column is-one-third">
+                <div class="field">
+                  <div class="control">
+                    <input class="button is-primary is-outlined is-medium is-fullwidth is-rounded" type="submit" value="Submit" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+    <script>
+        $('form').on('submit', (e) => {
+            e.preventDefault();
+            e.preventDefault();
+            const name = $('#name').val().trim();
+            const email = $('#email').val().trim();
+            const story = $('#story').val().trim();
+            const outcome = $('#outcome').val().trim();
+            const type = $('#type').val().trim();
+
+            const data = {
+                name,
+                email,
+                story,
+                outcome,
+                type,
+            };
+            
+            $.post('/mentorshipSubmit', data, () => {
+                alert('received');
+            })
+        })
+    </script>
+    <script src="js/main-min.js"></script>
+  </body>
+</html>
