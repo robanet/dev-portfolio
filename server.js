@@ -79,6 +79,10 @@ app.get('/projectPlanner', (req,res) => {
     res.sendFile(path.join(__dirname, "views", 'project-planner.html'));
 })
 
+app.get('/success', (req,res) => {
+    res.sendFile(path.join(__dirname, 'views', "success.html"));
+})
+
 app.listen(PORT, () => {
     console.log(`Listenning to Port ${PORT}`);
 })
