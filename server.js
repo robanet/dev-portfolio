@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require('path');
-const {sendContactMail, sendStartupInqueyMail,sendMentorshipInqueryMail} = require('./mail');
+const { sendContactMail, sendStartupInqueyMail,sendMentorshipInqueryMail,sendProjectPlanningMail } = require('./mail');
 const PORT = 8080;
 const app = express();
 
@@ -46,6 +46,18 @@ app.post('/startupSubmit', (req,res) => {
     })
 })
 
+app.post('/projectSubmit', (req,res) => {
+    const {name, email, details, type, budget} = req.body;
+    sendProjectPlanningMail(email, name, "Project Planning", details, type, budget, (err,data) => {
+        if(err){
+            res.status(500).json({message: "Internal Error"});
+        }
+        else{
+            res.status(200).json({message: "Email sent successfully"});
+        } 
+    })
+})
+
 app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 })
@@ -56,10 +68,15 @@ app.get('/startupInquery', (req,res) => {
 
 app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'contact.html'));
+    console.log("contact");
 }) 
 
 app.get('/mentorshipInquery', (req,res) => {
     res.sendFile(path.join(__dirname, "views", "mentorship-inquery.html"));
+})
+
+app.get('/projectPlanner', (req,res) => {
+    res.sendFile(path.join(__dirname, "views", 'project-planner.html'));
 })
 
 app.listen(PORT, () => {
